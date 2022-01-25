@@ -25,8 +25,10 @@ print(a, b) #Test
 for a, b in zip(a, b): 
     if a == b:
         isSquare.append('Yes')
+        isRectangle.append('')
     else:
         isRectangle.append(a * b)
+        isSquare.append('')
 print(isSquare, isRectangle) #Test
 #Using pandas to get dataframe
 data = [a_list, b_list, isRectangle, isSquare]
