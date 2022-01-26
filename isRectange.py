@@ -38,20 +38,22 @@ data = data.transpose() #To Transpose and make each rows as columns
 data.columns=['a','b', 'S', 'isSquare'] #Rename the columns
 data.insert(0, 'datetime', pd.to_datetime('now').strftime("%m/%d/%Y %H:%M:%S"))
 data.head()
-data.fillna('Null', inplace=True)
+data.dropna()
 print(data) #Test
-
+filesize = os.path.getsize(dst)
 #Checking does file exists
 if os.path.exists(dst): 
-    filesize = os.path.getsize(dst) #Is file empty or not
-    print('Your file size: ', filesize)
     with open(dst, 'a', encoding='utf-8') as fn:
-        if filesize == 0:
+        if filesize == 0:#Is file empty or not
             data.to_csv(fn, index=False, sep=';', header=True, line_terminator='\n')
+            data.dropna()
         else:
             data.to_csv(fn, index=False, sep=';', header=False, line_terminator='\n')
+            data.dropna()
 #If we don't have a file we create it
 else:
     with open(dst, 'x', encoding='utf-8') as fn:
         data.to_csv(fn, index=False, sep=';', header=True, line_terminator='\n')
-    
+        data.dropna()
+suur = os.path.getsize(dst)
+print('Your file size: ', suur)    
