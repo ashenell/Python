@@ -13,7 +13,7 @@ while True:
         if rows <= 49 or rows >=5001:
             print('Sorry, your response was less than expeted. Using default value 100.')
             rows = 100
-            break
+        break
     except ValueError:
         rows = 100
         break
@@ -23,7 +23,7 @@ while True:
         if char <= 1 or char >=6:
             print('Sorry, your response was less than expeted. Using default value 3.')
             char = 3
-            break
+        break
     except ValueError:
         char = 3
         break
@@ -33,7 +33,7 @@ while True:
         if cols <= 4 or cols >= 11:
             print('Sorry, your response was less than expeted. Using default value 3.')
             cols = 10
-            break
+        break
     except ValueError:
         cols = 10
         break
