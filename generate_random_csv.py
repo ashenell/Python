@@ -1,7 +1,3 @@
-'''
-Kursus: TAK21
-Koostas: Rauno Vaher
-'''
 #Libry
 import csv
 import string
@@ -48,23 +44,33 @@ while True:
         continue
     else:
         break
-dest = str(input('Enter the file name: ') or 'Create-MyCSV.csv') #Asking for a user file name, if we dont enter the value, uses the default
+dest = str(input('Enter the file name, must write with file type: ') or 'Create-MyCSV.csv') #Asking for a user file name, if we dont enter the value, uses the default
 line = 0
 line1 = 0
 #Function for random strings and integers
 def id_generator(size= char, chars=string.ascii_uppercase + string.digits):
     return ''.join(random.choice(chars) for _ in range(size))
-def nr_generator(size= char, chars= string.digits):
+def nr_generator(size= char, chars=string.digits):
     return ''.join(random.choice(chars) for _ in range(size))
+
+print(nr_generator())
+print(id_generator())
 uusa = []
 uusa1 = []
+nums1 = nums -1
+
 for i in range(rows * cols):
     line += 1
     uusa1.append(id_generator())
+    
     if line == cols:
         uusa.append(uusa1)
         line = 0
         uusa1 = []
+        
+uusa[nums1::nums] = [nr_generator() for x in uusa[nums1::nums]]
+print(uusa)
+
 def write_csv_file(filename: dest, data: uusa):
         with open(filename, "w", newline="") as csv_file:
             csv_writer = csv.writer(csv_file, delimiter=";")
