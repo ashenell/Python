@@ -9,7 +9,6 @@ import csv
 import os
 import os.path
 import pandas as pd 
-
 #Making random numbers
 a = random.randint(1,10, size=(5))
 b = random.randint(1,10, size=(5))
@@ -25,7 +24,7 @@ print(a, b) #Test
 for a, b in zip(a, b): 
     if a == b:
         isSquare.append('Yes')
-        isRectangle.append('')
+        isRectangle.append(a * b)
     else:
         isRectangle.append(a * b)
         isSquare.append('')
@@ -36,24 +35,26 @@ data = [a_list, b_list, isRectangle, isSquare]
 data = pd.DataFrame([a_list,b_list, isRectangle, isSquare]) #Each list would be added as a row
 data = data.transpose() #To Transpose and make each rows as columns
 data.columns=['a','b', 'S', 'isSquare'] #Rename the columns
-data.insert(0, 'datetime', pd.to_datetime('now').strftime("%m/%d/%Y %H:%M:%S"))
+data.insert(0, 'datetime', pd.to_datetime('now').strftime("%m.%d.%Y %H:%M:%S"))
 data.head()
 data.dropna()
 print(data) #Test
-filesize = os.path.getsize(dst)
+if dst == True:
+    dst = os.path.getsize(dst)
 #Checking does file exists
 if os.path.exists(dst): 
     with open(dst, 'a', encoding='utf-8') as fn:
-        if filesize == 0:#Is file empty or not
+        if dst == 0:#Is file empty or not
             data.to_csv(fn, index=False, sep=';', header=True, line_terminator='\n')
             data.dropna()
         else:
             data.to_csv(fn, index=False, sep=';', header=False, line_terminator='\n')
             data.dropna()
+
 #If we don't have a file we create it
 else:
     with open(dst, 'x', encoding='utf-8') as fn:
         data.to_csv(fn, index=False, sep=';', header=True, line_terminator='\n')
         data.dropna()
 suur = os.path.getsize(dst)
-print('Your file size: ', suur)    
+print('Your file size: ', suur)
